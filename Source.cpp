@@ -1,4 +1,7 @@
-﻿#undef UNICODE   // Pārslēgt projektu ASCII režīmā 
+﻿// Author: Lidija Sokolova
+// First Lab Operational Systems
+
+#undef UNICODE   // Pārslēgt projektu ASCII režīmā 
 #include <windows.h> 
 #include <stdio.h> 
 #include "stdio.h"//stdio
@@ -47,9 +50,12 @@ void ShowInfo(HWND wnd) {
 	// Current Date and Time. GetLocalTime
 	SYSTEMTIME sm;
 	GetLocalTime(&sm);
-	sprintf_s
+	sprintf_s(buf, "%d:%d:%d %d.%d.%d", sm.wHour, sm.wMinute, sm.wSecond, sm.wDay, sm.wMonth, sm.wYear);
 	SetDlgItemText(wnd, IDC_DATETIME, buf);
 	// Time since power on. GetTickCount
+	DWORD tm = GetTickCount();
+	sprintf_s(buf, "%d minutes", tm/1000/60);
+	SetDlgItemText(wnd, IDC_TIMEON, buf);
 }
 
 BOOL CALLBACK MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam) {  
